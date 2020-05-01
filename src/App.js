@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Article from './components/Article/Article';
 import Search from './components/Search/Search';
+import { Transition, CSSTransition } from 'react-transition-group';
 import logo from './logo.svg';
 import './App.css';
 
@@ -51,13 +52,25 @@ class App extends Component {
 
   render() {
     let articles = null;
+    let noResults = null;
+    let inProp = false;
     const filiteredArticles = this.state.articlesArr.filter(el => el.title.toLowerCase().indexOf(this.state.phrase) !== -1);
 
+    if(filiteredArticles.length === 0) {
+      inProp = true;
+      noResults = (
+        <h3 className="Msg-empty">No match for: <span>{this.state.phrase}</span></h3>
+      )
+    } else {
+      inProp = false;
+      noResults = null;
+    }
+
     articles = (
-      <ul>
+      <ul className="List">
         {filiteredArticles.map(article => {
           return <Article
-            article={article.url}
+            url={article.url}
             img={article.image}
             title={article.title}/>
         })}
@@ -69,6 +82,11 @@ class App extends Component {
         <img src={logo} className="App-logo" alt="logo" />
         <Search change={(event) => this.searchHandler(event)} />
         {articles}
+        <CSSTransition in={inProp} timeout={500} classNames="slide">
+          <div key="transition-group-content">
+            {noResults}
+          </div>
+        </CSSTransition>
       </div>
     );
   }

@@ -1,5 +1,25 @@
+:root {
+  --maastricht-blue: #05122D;
+  --cetacean-blue: #0C1444;
+  --space-cadet: #1C1854;
+  --russian-violet: #2E145D;
+  --russian-violet2: #261342;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--maastricht-blue);
+}
+
 .App {
   text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
 }
 
 .App-logo {
@@ -13,19 +33,29 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.List {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--cetacean-blue);
 }
 
-.App-link {
-  color: #61dafb;
+.Msg-empty {
+  color: #fff;
+}
+
+.Msg-empty span {
+  text-decoration: underline;
+}
+
+.slide-enter {
+  opacity: 0;
+  margin-top: 70px;
+}
+.slide-enter-active {
+  margin-top: 0;
+  opacity: 1;
+  transition: all .5s linear;
 }
 
 @keyframes App-logo-spin {
